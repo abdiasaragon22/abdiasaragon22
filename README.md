@@ -1,4 +1,4 @@
-# Hola, soy Abdías 👋 
+# Hola, soy Abdías
 ### Ingeniero en Sistemas de Telecomunicación | Apasionado por la comunicaciones inalámbricasy el desarrollo
 
 Soy un estudiante de 4º año de Ingeniería de Telecomunicación, con un fuerte enfoque en el análisis de señales, la simulación de redes y el desarrollo de soluciones de software eficientes. Me encanta moverme entre capas: desde la física de los canales de radio hasta la lógica de aplicaciones web.
