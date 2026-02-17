@@ -1,0 +1,12 @@
+{# templates/gamerank/comments_list.html #}
+{% for comment in comments %}
+  <div class="comment" id="comment-{{ comment.id }}">
+    <p>
+      <strong>{{ comment.user.username }}</strong>
+      <em>{{ comment.created_at|date:"SHORT_DATETIME_FORMAT" }}</em>
+    </p>
+    <p>{{ comment.content }}</p>
+  </div>
+{% empty %}
+  <p>No hay comentarios aún.</p>
+{% endfor %}

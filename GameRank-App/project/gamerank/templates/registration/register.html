@@ -1,0 +1,38 @@
+{% extends 'gamerank/base.html' %}
+
+{% block title %}Registro | GameRank{% endblock %}
+
+{% block content %}
+  <main id="main-content" class="settings-page">
+    <h2>Registrarse</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div>
+        {{ form.username.label_tag }}<br>
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+      <div>
+        {{ form.email.label_tag }}<br>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+      <div>
+        {{ form.password1.label_tag }}<br>
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+      </div>
+      <div>
+        {{ form.password2.label_tag }}<br>
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+      </div>
+      <button type="submit">Crear cuenta</button>
+    </form>
+
+    <p>¿Ya tienes cuenta?
+      <a href="{% url 'gamerank:login' %}">Inicia sesión aquí</a>.
+    </p>
+  </main>
+{% endblock %}

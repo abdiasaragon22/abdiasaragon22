@@ -1,0 +1,7 @@
+<div class="comment">
+  <p>
+    <strong>{{ comment.user.username }}</strong>
+    <em>{{ comment.created_at|date:"SHORT_DATETIME_FORMAT" }}</em>
+  </p>
+  <p>{{ comment.content }}</p>
+</div>

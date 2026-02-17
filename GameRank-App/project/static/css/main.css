@@ -1,0 +1,582 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  flex: 1;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+#header {
+  background-color: #4a6fa5;
+  color: #f0f0f0;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+#main-nav {
+  background-color: #3b5998;
+  color: #e1e8f0;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+#main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+#footer {
+  background-color: #4a6fa5;
+  color: #f0f0f0;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Login distancia entre formatos de texto */
+#main-content.settings-page input[type="text"],
+#main-content.settings-page input[type="email"],
+#main-content.settings-page input[type="password"],
+#main-content.settings-page select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  flex: 1 0 auto;
+  background-image: url("{% static 'images/gamerank-background.png' %}");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #333;
+}
+
+
+.home-container {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.home-logo {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 1rem;
+}
+
+.home-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.home-description {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+@media (max-width: 992px) {
+  .game-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .game-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .game-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.game-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* CONTENEDOR PARA IMAGENES */
+.game-card-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.game-card-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+.game-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4a6fa5;
+  margin-bottom: 0.5rem;
+}
+/* Espacio entre Botones */
+
+.game-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem; /* espacio entre botones */
+  flex-wrap: wrap; /* que pueda bajar a la siguiente línea si falta espacio */
+}
+
+.btn-unfollow {
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-unfollow:hover {
+  background-color: #c82333;
+}
+
+/* ----- COMENTARIOS ----- */
+.comment-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-section h2 {
+  font-size: 1.8rem;
+  color: #4a6fa5;
+  margin-bottom: 1rem;
+}
+
+.comment {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #4a6fa5;
+}
+
+.comment p {
+  margin-bottom: 0.5rem;
+}
+
+.comment strong {
+  color: #007bff;
+}
+
+.comment em {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.comment-form {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #e9ecef;
+  border-radius: 8px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.comment-form .btn-primary-custom {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.comment-form .btn-primary-custom:hover {
+  background-color: #0056b3;
+}
+
+.votes-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.votes-title {
+  font-size: 1.8rem;
+  color: #4a6fa5;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.votes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.vote-card {
+  background-color: #f1f3f5;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.vote-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vote-link {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007bff;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.vote-link:hover {
+  text-decoration: underline;
+}
+
+.vote-score {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.no-votes {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+#main-content.settings-page {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem 3rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+#main-content.settings-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+#main-content.settings-page label {
+  font-weight: 600;
+  color: #4a6fa5;
+}
+
+#main-content.settings-page input[type="text"],
+#main-content.settings-page select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+#main-content.settings-page input[type="text"]:focus,
+#main-content.settings-page select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+#main-content.settings-page button[type="submit"] {
+  background-color: #007bff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#main-content.settings-page button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.messages {
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 0;
+  list-style: none;
+}
+
+.messages li {
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.messages li.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.messages li.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+
+/* Profile Page */
+
+.profile-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.profile-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #4a6fa5;
+  text-align: center;
+}
+
+.profile-section-title {
+  font-size: 1.75rem;
+  color: #4a6fa5;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #4a6fa5;
+  padding-bottom: 0.25rem;
+}
+
+.stats-list,
+.game-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.stats-list li,
+.game-list li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.game-list a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.game-list a:hover {
+  text-decoration: underline;
+}
+
+/* Votaciones del usuario */
+.votes-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.votes-title {
+  font-size: 1.8rem;
+  color: #4a6fa5;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.votes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.vote-card {
+  background-color: #f1f3f5;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.vote-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vote-link {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007bff;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.vote-link:hover {
+  text-decoration: underline;
+}
+
+.vote-score {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.vote-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btn-primary-custom {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background-color: #0056b3;
+}
+
+.btn-follow {
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-follow:hover {
+  background-color: #218838;
+}
+
+.btn-unfollow {
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-unfollow:hover {
+  background-color: #c82333;
+}
+
+.no-votes {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+.game-actions a.btn,
+.game-actions button {
+  margin-right: 0.75rem;
+}
+
+/* Pagina de ayuda */
+
+.help-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  line-height: 1.6;
+  padding: 0 1rem;
+}
+
+.help-container h1,
+.help-container h2 {
+  color: #4a6fa5;
+  margin-bottom: 1rem;
+}
+
+.help-container ul {
+  margin-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+

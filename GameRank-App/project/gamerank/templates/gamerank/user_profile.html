@@ -1,0 +1,56 @@
+{% extends 'gamerank/base.html' %}
+{% load static %}
+
+{% block title %}Perfil de {{ request.user.username }} — GameRank{% endblock %}
+
+{% block content %}
+  <div class="profile-container">
+    <h1 class="profile-title">Perfil de {{ request.user.username }}</h1>
+
+    <div class="profile-grid">
+      <div class="profile-card">
+        <h2 class="profile-section-title">Estadísticas</h2>
+        <ul class="stats-list">
+          <li><strong>Votaciones realizadas:</strong> {{ total_votes }}</li>
+          <li><strong>Puntuación media dada:</strong> {{ avg_score }} / 5</li>
+        </ul>
+      </div>
+
+      <div class="profile-card">
+        <h2 class="profile-section-title">Juegos que has votado</h2>
+        {% if voted_games %}
+          <ul class="game-list">
+            {% for vote in voted_games %}
+              <li>
+                <a href="{% url 'gamerank:game_detail' vote.game.xml_id %}" class="profile-link">
+                  {{ vote.game.title }}
+                </a> — Tu puntuación: <strong>{{ vote.score }}/5</strong>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No has votado ningún juego aún.</p>
+        {% endif %}
+        <a href="{% url 'gamerank:user_votes' %}" class="profile-link">Ver más detalles en “Mis Votos”</a>
+      </div>
+
+      <div class="profile-card">
+        <h2 class="profile-section-title">Juegos que sigues</h2>
+        {% if followed_games %}
+          <ul class="game-list">
+            {% for game in followed_games %}
+              <li>
+                <a href="{% url 'gamerank:game_detail' game.xml_id %}" class="profile-link">
+                  {{ game.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No sigues ningún juego aún.</p>
+        {% endif %}
+        <a href="{% url 'gamerank:user_followed' %}" class="profile-link">Ver más detalles en “Mis Seguidos”</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

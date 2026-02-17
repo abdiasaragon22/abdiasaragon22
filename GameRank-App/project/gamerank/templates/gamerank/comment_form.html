@@ -1,0 +1,15 @@
+<div class="comment-form">
+  <form method="post"
+        hx-post="{% url 'gamerank:comments_post' game.xml_id %}"
+        hx-target="#comments-container"
+        hx-swap="beforeend"
+        hx-trigger="submit"
+  >
+    {% csrf_token %}
+    {{ comment_form.non_field_errors }}
+    <label for="{{ comment_form.content.id_for_label }}">Comentario:</label><br>
+    {{ comment_form.content }}<br>
+    {{ comment_form.content.errors }}
+    <button type="submit" class="btn-primary-custom">Enviar comentario</button>
+  </form>
+</div>

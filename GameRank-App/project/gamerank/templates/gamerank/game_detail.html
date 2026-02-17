@@ -1,0 +1,118 @@
+{% extends 'gamerank/base.html' %}
+
+{% block title %}{{ game.title }} — GameRank{% endblock %}
+
+{% block content %}
+  <style>
+    /* Botón debajo y alineado a la izquierda */
+    .game-actions {
+      margin-top: 1rem;
+      text-align: left;
+      display: block;
+    }
+  </style>
+
+  <h1>{{ game.title }}</h1>
+  <p><strong>ID:</strong> {{ game.xml_id }}</p>
+
+  {% if game.thumbnail %}
+    <img src="{{ game.thumbnail }}" alt="Portada de {{ game.title }}" class="game-card-img">
+  {% endif %}
+
+  <ul>
+    <li><strong>Desarrollador:</strong> {{ game.developer }}</li>
+    <li><strong>Publisher:</strong> {{ game.publisher }}</li>
+    <li><strong>Género:</strong> {{ game.genre }}</li>
+    <li><strong>Plataforma:</strong> {{ game.platform }}</li>
+    <li><strong>Fecha de lanzamiento:</strong> {{ game.release_date }}</li>
+  </ul>
+
+  <p><strong>Descripción:</strong> {{ game.description }}</p>
+
+  <a href="{% url 'gamerank:game_detail_json' game.xml_id %}" class="btn btn-outline-secondary btn-sm">
+    Descargar JSON del juego
+  </a>
+
+  {# ---- SEGUIR / DEJAR DE SEGUIR ---- #}
+  {% if request.user.is_authenticated %}
+    <div class="game-actions">
+      <form action="{% url 'gamerank:follow_game' game.xml_id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% url 'gamerank:game_detail' game.xml_id %}">
+        {% if is_following %}
+          <button type="submit" class="btn-unfollow">Dejar de seguir</button>
+        {% else %}
+          <button type="submit" class="btn-follow">Seguir</button>
+        {% endif %}
+      </form>
+    </div>
+  {% else %}
+    <p class="text-muted">
+      <a href="{% url 'gamerank:login' %}?next={% url 'gamerank:game_detail' game.xml_id %}" class="profile-link">
+        Inicia sesión para seguir este juego.
+      </a>
+    </p>
+  {% endif %}
+
+  {# ---- COMENTARIOS ---- #}
+  <div class="comment-section">
+    <h2>Comentarios</h2>
+    {% for comment in comments %}
+      <div class="comment">
+        <p>
+          <strong>{{ comment.user.username }}</strong>
+          <em>{{ comment.created_at|date:"SHORT_DATETIME_FORMAT" }}</em>
+        </p>
+        <p>{{ comment.content }}</p>
+      </div>
+    {% empty %}
+      <p>No hay comentarios aún.</p>
+    {% endfor %}
+  </div>
+  <a href="{% url 'gamerank:game_detail_dynamic' game.xml_id %}" class="btn btn-secondary mb-3">
+    Ver detalle dinámico con comentarios
+  </a>
+  {# ---- FORMULARIO DE COMENTARIO ---- #}
+  {% if request.user.is_authenticated %}
+    <div class="comment-form">
+      <h3>Deja tu comentario</h3>
+      <form method="post">
+        {% csrf_token %}
+        {{ comment_form.non_field_errors }}
+        <div class="form-group">
+          {{ comment_form.content.label_tag }}<br>
+          {{ comment_form.content }}
+          {{ comment_form.content.errors }}
+        </div>
+        <button type="submit" name="comment_submit" class="btn-primary-custom">Enviar comentario</button>
+      </form>
+    </div>
+  {% else %}
+    <p class="text-muted">
+      <a href="{% url 'gamerank:login' %}?next={% url 'gamerank:game_detail' game.xml_id %}" class="profile-link">
+        Inicia sesión para comentar.
+      </a>
+    </p>
+  {% endif %}
+
+  {# ---- VOTO ANTERIOR ---- #}
+  {% if user_vote is not None %}
+    <div class="vote-section">
+      <h3>Tu último voto:</h3>
+      <p><strong>{{ user_vote }}/5</strong></p>
+    </div>
+  {% else %}
+    <div class="vote-section">
+      <h3>Valora este juego</h3>
+      <form method="post">
+        {% csrf_token %}
+        {{ vote_form.score }}
+        <button type="submit" name="vote_submit" class="btn-primary-custom">Enviar voto</button>
+      </form>
+    </div>
+  {% endif %}
+
+  <p>
+    <a href="{% url 'gamerank:all_games' %}" class="profile-link">← Volver a todos los juegos</a>
+  </p>
+{% endblock %}

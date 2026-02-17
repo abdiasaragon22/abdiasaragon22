@@ -1,0 +1,73 @@
+{% extends 'gamerank/base.html' %}
+
+{% block title %}{{ game.title }} — GameRank{% endblock %}
+
+{% block content %}
+  <style>
+    /* Botón debajo y alineado a la izquierda */
+    .game-actions {
+      margin-top: 1rem;
+      text-align: left;
+      display: block;
+    }
+  </style>
+  <h1>{{ game.title }}</h1>
+  <p><strong>ID:</strong> {{ game.xml_id }}</p>
+
+  {% if game.thumbnail %}
+    <img src="{{ game.thumbnail }}" alt="Portada de {{ game.title }}" class="game-card-img">
+  {% endif %}
+
+  <ul>
+    <li><strong>Desarrollador:</strong> {{ game.developer }}</li>
+    <li><strong>Publisher:</strong> {{ game.publisher }}</li>
+    <li><strong>Género:</strong> {{ game.genre }}</li>
+    <li><strong>Plataforma:</strong> {{ game.platform }}</li>
+    <li><strong>Fecha de lanzamiento:</strong> {{ game.release_date }}</li>
+  </ul>
+
+  <p><strong>Descripción:</strong> {{ game.description }}</p>
+
+  {# Botón seguir / dejar de seguir #}
+  {% if request.user.is_authenticated %}
+    <div class="game-actions">
+      <form action="{% url 'gamerank:follow_game' game.xml_id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% url 'gamerank:game_detail_dynamic' game.xml_id %}">
+        {% if is_following %}
+          <button type="submit" class="btn-unfollow">Dejar de seguir</button>
+        {% else %}
+          <button type="submit" class="btn-follow">Seguir</button>
+        {% endif %}
+      </form>
+    </div>
+  {% else %}
+    <p class="text-muted">
+      <a href="{% url 'gamerank:login' %}?next={% url 'gamerank:game_detail_dynamic' game.xml_id %}" class="profile-link">
+        Inicia sesión para seguir este juego.
+      </a>
+    </p>
+  {% endif %}
+
+  {# Comentarios dinámicos HTMX #}
+  <h2>Comentarios</h2>
+  <div
+  id="comments-container"
+  hx-get="{% url 'gamerank:comments_list' game.xml_id %}"
+  hx-trigger="load, every 30s"
+  hx-swap="innerHTML"
+  >
+  <!-- Comentarios cargados dinámicamente -->
+  </div>
+
+  <div
+    id="comment-form-container"
+    hx-get="{% url 'gamerank:comments_post' game.xml_id %}"
+    hx-trigger="load"
+    hx-swap="innerHTML"
+  ></div>
+
+  <p>
+    <a href="{% url 'gamerank:all_games' %}" class="profile-link">← Volver a todos los juegos</a>
+  </p>
+{% endblock %}

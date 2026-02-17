@@ -1,0 +1,40 @@
+{% extends 'gamerank/base.html' %}
+{% load static %}
+
+{% block title %}Juegos Seguidos — GameRank{% endblock %}
+
+{% block content %}
+  <h2 class="page-title">Juegos Seguidos</h2>
+
+  {% if games %}
+    <div class="game-grid">
+      {% for game in games %}
+        <div class="game-card">
+          <a href="{% url 'gamerank:game_detail' game.xml_id %}">
+            <img src="{{ game.thumbnail }}" alt="{{ game.title }} thumbnail" class="game-card-img">
+          </a>
+
+          <h3 class="game-title">
+            <a href="{% url 'gamerank:game_detail' game.xml_id %}" class="profile-link">
+              {{ game.title }}
+            </a>
+          </h3>
+
+          <p><strong>Plataforma:</strong> {{ game.platform }}</p>
+          <p><strong>Género:</strong> {{ game.genre }}</p>
+          <p><strong>Puntuación media:</strong> {{ game.average_rating }} / 5</p>
+
+          <div class="game-actions">
+            <form action="{% url 'gamerank:follow_game' game.xml_id %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{% url 'gamerank:user_followed' %}">
+              <button type="submit" class="btn-unfollow">Dejar de seguir</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No sigues ningún juego.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'gamerank/base.html' %}
+{% block title %}Mis Votos — GameRank{% endblock %}
+
+{% block content %}
+  <div class="votes-container">
+    <h2 class="votes-title">Juegos que he votado</h2>
+
+    {% if user_votes %}
+      <div class="votes-grid">
+        {% for vote in user_votes %}
+          <div class="vote-card">
+            <h3 class="vote-title">
+              <a href="{% url 'gamerank:game_detail' vote.game.xml_id %}" class="vote-link">
+                {{ vote.game.title }}
+              </a>
+            </h3>
+            <p class="vote-score">Mi puntuación: <strong>{{ vote.score }}/5</strong></p>
+
+            <div class="vote-info">
+              <p><strong>Género:</strong> {{ vote.game.genre }}</p>
+              <p><strong>Plataforma:</strong> {{ vote.game.platform }}</p>
+              <p><strong>Puntuación media:</strong> {{ vote.game.average_rating }} / 5</p>
+              <p><strong>Número de votos:</strong> {{ vote.game.num_votes }}</p>
+            </div>
+
+            <div class="vote-actions" style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+              <a href="{% url 'gamerank:game_detail' vote.game.xml_id %}" class="btn btn-primary-custom">Detalles</a>
+
+              {% if request.user.is_authenticated %}
+               <form action="{% url 'gamerank:follow_game' vote.game.xml_id %}" method="post" class="d-inline">
+                  {% csrf_token %}
+                  <input type="hidden" name="next" value="{% url 'gamerank:user_votes' %}">
+                  {% if vote.game.xml_id in user_followed_ids %}
+                    <button type="submit" class="btn btn-unfollow">Dejar de seguir</button>
+                  {% else %}
+                    <button type="submit" class="btn btn-follow">Seguir</button>
+                  {% endif %}
+                </form>
+              {% else %}
+                <a href="{% url 'gamerank:login' %}" class="btn btn-primary-custom">Inicia sesión</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="no-votes">Aún no has votado ningún juego.</p>
+    {% endif %}
+  </div>
+{% endblock %}

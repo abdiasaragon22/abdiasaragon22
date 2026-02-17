@@ -1,0 +1,46 @@
+{% extends 'gamerank/base.html' %}
+{% block title %}Todos los Juegos | GameRank{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">Todos los Juegos</h1>
+
+  <div class="game-grid">
+    {% for game in games %}
+      <div class="game-card">
+        <h2>{{ game.title }} <small class="text-muted">(ID: {{ game.id }})</small></h2>
+
+        {% if game.thumbnail %}
+          <div class="game-card-img-container">
+            <img src="{{ game.thumbnail }}" alt="{{ game.title }}" class="game-card-img">
+          </div>
+        {% endif %}
+        <div class="game-info">
+          <p><strong>Plataforma:</strong> {{ game.platform }}</p>
+          <p><strong>Género:</strong> {{ game.genre }}</p>
+          <p><strong>Desarrollador:</strong> {{ game.developer }}</p>
+          <p><strong>Publisher:</strong> {{ game.publisher }}</p>
+          <p><strong>Fecha de lanzamiento:</strong> {{ game.release_date }}</p>
+          <p><strong>Puntuación media:</strong> {{ game.average_rating }}</p>
+          <p><strong>Número de votos:</strong> {{ game.num_votes }}</p>
+        </div>
+
+        <div class="game-actions">
+          <a href="{% url 'gamerank:game_detail' game.id %}" class="btn btn-primary-custom">Detalles</a>
+
+          {% if request.user.is_authenticated %}
+            <form action="{% url 'gamerank:follow_game' game.id %}" method="post" class="d-inline">
+              {% csrf_token %}
+              {% if game.id in user_followed_ids %}
+                <button type="submit" class="btn btn-unfollow">Dejar de seguir</button>
+              {% else %}
+                <button type="submit" class="btn btn-follow">Seguir</button>
+              {% endif %}
+            </form>
+          {% else %}
+            <a href="{% url 'gamerank:login' %}" class="btn btn-primary-custom">Inicia sesión</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'gamerank/base.html' %}
+
+{% block title %}Configuración — GameRank{% endblock %}
+
+{% block content %}
+  <main id="main-content" class="site-content container settings-page">
+    <h1>Configuración de tu cuenta</h1>
+
+    {% if messages %}
+      <ul class="messages">
+        {% for msg in messages %}
+          <li class="{{ msg.tags }}">{{ msg }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <p>
+        {{ form.alias.label_tag }}<br>
+        {{ form.alias }}
+        {{ form.alias.errors }}
+      </p>
+
+      <p>
+        {{ form.font_family.label_tag }}<br>
+        {{ form.font_family }}
+        {{ form.font_family.errors }}
+      </p>
+
+      <p>
+        {{ form.font_size.label_tag }}<br>
+        {{ form.font_size }}
+        {{ form.font_size.errors }}
+      </p>
+
+      <button type="submit">Guardar cambios</button>
+    </form>
+  </main>
+{% endblock %}

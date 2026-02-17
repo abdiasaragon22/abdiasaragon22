@@ -1,0 +1,15 @@
+{% extends 'gamerank/base.html' %}
+{% load static %}
+
+{% block title %}Inicio – GameRank{% endblock %}
+
+{% block content %}
+  <div class="home-container">
+    <img src="{% static 'icons/favicon.png' %}" alt="GameRank Logo" class="home-logo">
+
+    <h2 class="home-title">Bienvenido a GameRank</h2>
+    <p class="home-description">
+      Explora, sigue y vota tus juegos favoritos en la plataforma más completa para gamers.
+    </p>
+  </div>
+{% endblock %}

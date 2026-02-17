@@ -1,0 +1,20 @@
+{% extends 'gamerank/base.html' %}
+{% load static %}
+
+{% block title %}Votar {{ game.title }}{% endblock %}
+
+{% block content %}
+  <h2>Vota "{{ game.title }}"</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar voto</button>
+  </form>
+
+  <p>
+    <a href="{% url 'gamerank:game_detail' game.pk %}">
+      ← Volver al detalle de "{{ game.title }}"
+    </a>
+  </p>
+{% endblock %}
