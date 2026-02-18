@@ -36,7 +36,7 @@ Aplicación web completa para la gestión y valoración de videojuegos, integran
 
 ## Contacta conmigo
 - **Email:** abdiasaragon22@gmail.com
-- **Linkein:** linkedin.com/in/abdíasaragón
+- **Linkein:** www.linkedin.com/in/abdíasaragón
 
 
 
